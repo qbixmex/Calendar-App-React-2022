@@ -4,13 +4,13 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { addHours } from 'date-fns';
 import { localizer, getMessagesEs } from "../../helpers";
 
-import { Navbar } from "../components";
+import { CalendarEvent, Navbar } from "../components";
 
 const events = [{
   title: 'ReactJs Course',
   notes: 'Exercise useState Hook and Custom Hooks',
   start: new Date(),
-  end: addHours(new Date(), 1),
+  end: addHours(new Date(), 2),
   bgColor: '#fafafa',
   user: {
     _id: '123',
@@ -47,6 +47,9 @@ export const CalendarPage = () => {
         endAccessor="end"
         messages={ getMessagesEs() }
         eventPropGetter={ eventStyleGetter }
+        components={{
+          event: CalendarEvent
+        }}
       />
     </>
   );
