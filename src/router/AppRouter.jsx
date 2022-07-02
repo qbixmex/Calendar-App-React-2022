@@ -17,7 +17,7 @@ export const AppRouter = () => {
 
   return (
     <Routes>
-      { mainRoutes('not-authenticated') }
+      { mainRoutes('authenticated') }
       <Route path="*" element={ <Navigate to="/auth/login" /> } />
     </Routes>
   );
