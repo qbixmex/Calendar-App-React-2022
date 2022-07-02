@@ -4,20 +4,15 @@ import { CalendarPage } from "../calendar";
 
 export const AppRouter = () => {
 
-  const mainRoutes = ( authStatus = 'not-authenticated' ) => {
-    switch (authStatus) {
-      case 'not-authenticated':
-        return (<Route path="/auth/*" element={ <LoginPage /> } />);
-      case 'authenticated':
-        return (<Route path="*" element={ <CalendarPage /> } />);
-      default:
-        return;
-    }
-  };
+  const authStatus = 'authenticated';
 
   return (
     <Routes>
-      { mainRoutes('authenticated') }
+      {
+        ( authStatus === 'not-authenticated' )
+         ? <Route path="/auth/*" element={ <LoginPage /> } />
+         : <Route path="*" element={ <CalendarPage /> } />
+      }
       <Route path="*" element={ <Navigate to="/auth/login" /> } />
     </Routes>
   );
