@@ -1,23 +1,10 @@
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-import { format, parse, startOfWeek, getDay } from 'date-fns';
-import es from 'date-fns/locale/es';
 import { addHours } from 'date-fns';
+import { localizer, getMessagesEs } from "../../helpers";
 
 import { Navbar } from "../components";
-
-const locales = {
-  'es': es,
-};
-
-const localizer = dateFnsLocalizer({
-  format,
-  parse,
-  startOfWeek,
-  getDay,
-  locales,
-});
 
 const events = [{
   title: 'ReactJs Course',
@@ -32,17 +19,36 @@ const events = [{
 }];
 
 export const CalendarPage = () => {
+
+  const eventStyleGetter = ( event, start, end, isSelected ) => {
+    console.log({ event, start, end, isSelected });
+
+    const style = {
+      backgroundColor: '#347CF7',
+      borderRadius: '0px',
+      opacity: 0.8,
+      color: '#fff',
+    };
+
+    return { style };
+  };
+
   return (
     <>
       <Navbar />
 
       <Calendar
+        className='mx-4'
+        style={{ height: 'calc(100vh - 120px)' }}
+        culture="es"
         localizer={ localizer }
         events={ events }
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 'calc(100vh - 96px)' }}
+        messages={ getMessagesEs() }
+        eventPropGetter={ eventStyleGetter }
       />
     </>
   );
+
 };
