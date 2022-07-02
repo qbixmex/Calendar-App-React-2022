@@ -1,0 +1,28 @@
+:root {
+  --blue: hsl(215, 90%, 60%);
+  --skyblue: hsl(200, 90%, 60%);
+  --purple: hsl(260, 70%, 60%);
+  --pink: hsl(330, 65%, 50%);
+  --red: hsl(355, 70%, 55%);
+  --orange: hsl(25, 90%, 55%);
+  --yellow: hsl(45, 100%, 50%);
+  --green: hsl(150, 55%, 50%);
+  --dark: #222;
+  --light: #eee;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #222;
+  color: var(--light);
+  font-size: 16px;
+}
+
+h1 {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 3rem;
+}
