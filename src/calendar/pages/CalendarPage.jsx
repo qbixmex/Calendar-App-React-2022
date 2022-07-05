@@ -5,7 +5,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { addHours } from 'date-fns';
 import { localizer, getMessagesEs } from "../../helpers";
 
-import { CalendarEvent, Navbar } from "../components";
+import { CalendarEvent, CalendarModal, Navbar } from "../components";
 
 const events = [{
   title: 'ReactJs Course',
@@ -69,6 +69,8 @@ export const CalendarPage = () => {
         onSelectEvent={ onSelect }
         onView={ onViewChanged }
       />
+
+      <CalendarModal />
     </>
   );
 
