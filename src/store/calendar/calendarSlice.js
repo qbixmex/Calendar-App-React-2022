@@ -4,6 +4,7 @@ import { addHours } from 'date-fns';
 // TODO: Replace this event when backend is finished
 // ----------------------------------------------------
 const temporaryEvent = {
+  _id: new Date().getTime(),
   title: 'Junta con el gobierno',
   notes: 'Revizar los términos del tratado de Sokovia',
   start: new Date(),
@@ -17,18 +18,18 @@ const temporaryEvent = {
 // TODO: Replace this event ---------------------------
 
 const initialState = {
- events: [temporaryEvent],
- activeEvent: null,
+  events: [temporaryEvent],
+  activeEvent: null,
 };
 
 export const calendarSlice = createSlice({
   name: 'calendar',
   initialState,
   reducers: {
-    actionName: ( state, action ) => {
-      state.name = action.payload;
+    onSetActiveEvent: ( state, action ) => {
+      state.activeEvent = action.payload;
     },
   },
 });
 
-export const { actionName } = calendarSlice.actions;
+export const { onSetActiveEvent } = calendarSlice.actions;

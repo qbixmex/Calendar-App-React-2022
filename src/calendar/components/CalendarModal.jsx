@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Modal from 'react-modal';
 import { addHours, differenceInSeconds } from 'date-fns';
 import DatePicker, { registerLocale } from 'react-datepicker';
@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-import { useUiStore } from '../../hooks/useUiStore';
+import { useUiStore, useCalendarStore } from '../../hooks';
 
 registerLocale('es', es);
 
@@ -25,22 +25,30 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 const initialForm = {
-  title: 'Meeting with the team',
-  notes: 'We\'re going to talk about next spring topics',
-  startDate: new Date(),
-  endDate: addHours(new Date(), 2),
+  title: '',
+  notes: '',
+  start: 0,
+  end: 0,
 };
 
 export const CalendarModal = () => {
   const { isDateModalOpen, closeDateModal } = useUiStore();
+  const { activeEvent } = useCalendarStore();
   const [ formSubmitted, setFormSubmitted ] = useState(false);
   const [ formValues, setFormValues ] = useState(initialForm);
-  const { title, notes, startDate, endDate } = formValues;
+  const { title, notes, start, end } = formValues;
 
   const titleClass = useMemo(() => {
     if(!formSubmitted) return '';
     return ( title.length > 0 ) ? ' is-valid' : ' is-invalid';
   },[ title, formSubmitted ]);
+
+  useEffect(() => {
+    if ( activeEvent !== null) {
+      setFormValues({ ...activeEvent });
+    }
+  }, [ activeEvent ])
+  
 
   const onInputChange = ({ target }) => {
     setFormValues({
@@ -54,6 +62,11 @@ export const CalendarModal = () => {
       ...formValues,
       [changing]: event
     })
+  };
+
+  const onOpenModal = () => {
+    //setActiveEvent
+    console.log('Modal is Opened');
   };
 
   const onCloseModal = () => {
@@ -105,7 +118,7 @@ export const CalendarModal = () => {
   return (
     <Modal
       isOpen={ isDateModalOpen }
-      onRequestClose={ onCloseModal }
+      onRequestOpen={ onOpenModal }
       style={ customStyles }
       className="modal"
       overlayClassName="modal-background"
@@ -118,7 +131,7 @@ export const CalendarModal = () => {
         <div className="form-group mb-2">
           <DatePicker
             className='form-control'
-            selected={ startDate }
+            selected={ start }
             onChange={ event => onDateChange( event, 'startDate' ) }
             dateFormat="Pp"
             showTimeSelect
@@ -129,9 +142,9 @@ export const CalendarModal = () => {
 
         <div className="form-group mb-2">
         <DatePicker
-            minDate={ startDate }
+            minDate={ start }
             className='form-control'
-            selected={ endDate }
+            selected={ end }
             onChange={ event => onDateChange( event, 'endDate' ) }
             dateFormat="Pp"
             showTimeSelect

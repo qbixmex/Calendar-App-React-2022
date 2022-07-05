@@ -9,7 +9,7 @@ import { useUiStore, useCalendarStore } from "../../hooks";
 
 export const CalendarPage = () => {
 
-  const { events } = useCalendarStore();
+  const { events, setActiveEvent } = useCalendarStore();
   const { openDateModal } = useUiStore();
 
   const [ lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week');
@@ -30,7 +30,9 @@ export const CalendarPage = () => {
     openDateModal();
   };
 
-  const onSelect = () => {};
+  const onSelect = ( event ) => {
+    setActiveEvent( event );
+  };
 
   const onViewChanged = ( event ) => {
     localStorage.setItem( 'lastView', event );
