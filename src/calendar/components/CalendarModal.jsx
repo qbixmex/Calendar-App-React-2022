@@ -19,24 +19,71 @@ export const CalendarModal = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   const onOpenModal = () => {
-    setIsOpen( true );
+    setIsOpen(true);
   };
-  
+
   const onCloseModal = () => {
-    setIsOpen( false );
+    setIsOpen(false);
   };
 
   return (
     <Modal
+      isOpen={isOpen}
+      onRequestClose={onCloseModal}
+      style={customStyles}
       className="modal"
-      style={ customStyles }
-      isOpen={ isOpen }
-      onRequestClose={ onCloseModal }
       overlayClassName="modal-background"
-      closeTimeoutMS={ 200 }
+      closeTimeoutMS={200}
     >
-      <h2>Custom Modal</h2>
-      <div>This is the content of my custom modal and it's very important.</div>
+      <h1>Crear Evento</h1>
+      <hr />
+
+      <form className="container">
+
+        <div className="form-group mb-2">
+          <input className="form-control" placeholder="Fecha y hora inicial" />
+        </div>
+
+        <div className="form-group mb-2">
+          <input className="form-control" placeholder="Fecha y hora final" />
+        </div>
+
+        <hr />
+
+        <div className="form-group mb-2">
+          <label className='mb-2'><b>Título y notas</b></label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Título del evento"
+            name="title"
+            autoComplete="off"
+          />
+        </div>
+
+        <div className="form-group mb-3">
+          <textarea
+            type="text"
+            className="form-control"
+            placeholder="Notas"
+            rows="5"
+            name="notes"
+          ></textarea>
+        </div>
+
+        <hr />
+
+        <div className='d-grid'>
+          <button
+            type="submit"
+            className="btn btn-outline-primary"
+          >
+            <i className="far fa-save" />&nbsp;
+            <span>Guardar</span>
+          </button>
+        </div>
+
+      </form>
     </Modal>
   );
 };
