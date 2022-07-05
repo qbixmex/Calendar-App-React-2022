@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isDateModalOpen: false
+  isDateModalOpen: false,
 };
 
 export const uiSlice = createSlice({
@@ -17,4 +17,4 @@ export const uiSlice = createSlice({
   },
 });
 
-export const { onOpenDateModal } = uiSlice.actions;
+export const { onOpenDateModal, onCloseDateModal } = uiSlice.actions;

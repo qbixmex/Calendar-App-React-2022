@@ -4,9 +4,10 @@ import { addHours, differenceInSeconds } from 'date-fns';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import es from 'date-fns/locale/es';
 import 'react-datepicker/dist/react-datepicker.css';
-
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+
+import { useUiStore } from '../../hooks/useUiStore';
 
 registerLocale('es', es);
 
@@ -31,12 +32,9 @@ const initialForm = {
 };
 
 export const CalendarModal = () => {
-  const [ isOpen, setIsOpen ] = useState(true);
-
+  const { isDateModalOpen, closeDateModal } = useUiStore();
   const [ formSubmitted, setFormSubmitted ] = useState(false);
-  
   const [ formValues, setFormValues ] = useState(initialForm);
-
   const { title, notes, startDate, endDate } = formValues;
 
   const titleClass = useMemo(() => {
@@ -58,12 +56,8 @@ export const CalendarModal = () => {
     })
   };
 
-  const onOpenModal = () => {
-    setIsOpen(true);
-  };
-
   const onCloseModal = () => {
-    setIsOpen(false);
+    closeDateModal();
   };
 
   const onFormSubmit = (event) => {
@@ -110,12 +104,12 @@ export const CalendarModal = () => {
   
   return (
     <Modal
-      isOpen={isOpen}
-      onRequestClose={onCloseModal}
-      style={customStyles}
+      isOpen={ isDateModalOpen }
+      onRequestClose={ onCloseModal }
+      style={ customStyles }
       className="modal"
       overlayClassName="modal-background"
-      closeTimeoutMS={200}
+      closeTimeoutMS={ 200 }
     >
       <h1>Crear Evento</h1>
       <hr />
