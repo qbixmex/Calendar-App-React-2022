@@ -64,11 +64,6 @@ export const CalendarModal = () => {
     })
   };
 
-  const onOpenModal = () => {
-    //setActiveEvent
-    console.log('Modal is Opened');
-  };
-
   const onCloseModal = () => {
     closeDateModal();
   };
@@ -118,7 +113,7 @@ export const CalendarModal = () => {
   return (
     <Modal
       isOpen={ isDateModalOpen }
-      onRequestOpen={ onOpenModal }
+      onRequestClose={ onCloseModal }
       style={ customStyles }
       className="modal"
       overlayClassName="modal-background"
