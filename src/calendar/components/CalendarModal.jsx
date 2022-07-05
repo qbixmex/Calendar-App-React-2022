@@ -27,8 +27,8 @@ Modal.setAppElement('#root');
 const initialForm = {
   title: '',
   notes: '',
-  start: 0,
-  end: 0,
+  start: new Date(),
+  end: addHours(new Date(), 1),
 };
 
 export const CalendarModal = () => {
