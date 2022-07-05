@@ -33,14 +33,14 @@ const initialForm = {
 
 export const CalendarModal = () => {
   const { isDateModalOpen, closeDateModal } = useUiStore();
-  const { activeEvent } = useCalendarStore();
+  const { activeEvent, startSavingEvent } = useCalendarStore();
   const [ formSubmitted, setFormSubmitted ] = useState(false);
   const [ formValues, setFormValues ] = useState(initialForm);
   const { title, notes, start, end } = formValues;
 
   const titleClass = useMemo(() => {
     if(!formSubmitted) return '';
-    return ( title.length > 0 ) ? ' is-valid' : ' is-invalid';
+    return ( title.length > 0 ) ? '' : ' is-invalid';
   },[ title, formSubmitted ]);
 
   useEffect(() => {
@@ -60,19 +60,19 @@ export const CalendarModal = () => {
   const onDateChange = ( event, changing ) => {
     setFormValues({
       ...formValues,
-      [changing]: event
-    })
+      [ changing ]: event
+    });
   };
 
   const onCloseModal = () => {
     closeDateModal();
   };
 
-  const onFormSubmit = (event) => {
+  const onFormSubmit = async ( event ) => {
     event.preventDefault();
-    setFormSubmitted(true);
+    setFormSubmitted( true );
 
-    const difference = differenceInSeconds( endDate, startDate );
+    const difference = differenceInSeconds( end, start );
 
     if ( isNaN( difference) ) {
       return Swal.fire(
@@ -98,16 +98,15 @@ export const CalendarModal = () => {
       );
     };
 
-    console.table(formValues);
-    
-    return Swal.fire(
+    await startSavingEvent( formValues );
+    closeDateModal();
+    setFormSubmitted( false );
+
+    Swal.fire(
       'Formulario Enviado',
       'Los datos del formulario son correctos',
       'success'
     );
-
-    // TODO close modal
-    // TODO remove screen errors
   };
   
   return (
@@ -127,7 +126,7 @@ export const CalendarModal = () => {
           <DatePicker
             className='form-control'
             selected={ start }
-            onChange={ event => onDateChange( event, 'startDate' ) }
+            onChange={ event => onDateChange( event, 'start' ) }
             dateFormat="Pp"
             showTimeSelect
             locale="es"
@@ -140,7 +139,7 @@ export const CalendarModal = () => {
             minDate={ start }
             className='form-control'
             selected={ end }
-            onChange={ event => onDateChange( event, 'endDate' ) }
+            onChange={ event => onDateChange( event, 'end' ) }
             dateFormat="Pp"
             showTimeSelect
             locale="es"
