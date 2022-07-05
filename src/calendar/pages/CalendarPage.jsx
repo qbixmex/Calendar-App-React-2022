@@ -2,26 +2,14 @@ import { useState } from "react";
 import { Calendar } from "react-big-calendar";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-import { addHours } from 'date-fns';
 import { localizer, getMessagesEs } from "../../helpers";
 
 import { CalendarEvent, CalendarModal, Navbar } from "../components";
-import { useUiStore } from "../../hooks";
-
-const events = [{
-  title: 'Meeting with UX team',
-  notes: 'Check screens for app',
-  start: new Date(),
-  end: addHours(new Date(), 2),
-  bgColor: '#fafafa',
-  user: {
-    _id: '123',
-    name: 'Tony Stark'
-  }
-}];
+import { useUiStore, useCalendarStore } from "../../hooks";
 
 export const CalendarPage = () => {
 
+  const { events } = useCalendarStore();
   const { openDateModal } = useUiStore();
 
   const [ lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week');
@@ -54,14 +42,14 @@ export const CalendarPage = () => {
       <Navbar />
 
       <Calendar
+        className='mx-4'
+        style={{ height: 'calc(100vh - 120px)' }}
         culture="es"
         localizer={ localizer }
         events={ events }
         defaultView={ lastView }
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 'calc(100vh - 120px)' }}
-        className='mx-4'
         messages={ getMessagesEs() }
         eventPropGetter={ eventStyleGetter }
         components={{ event: CalendarEvent }}
