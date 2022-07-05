@@ -118,7 +118,7 @@ export const CalendarModal = () => {
       overlayClassName="modal-background"
       closeTimeoutMS={ 200 }
     >
-      <h1>Crear Evento</h1>
+      <h1>{ activeEvent?._id ? 'Editar' : 'Crear' } Evento</h1>
       <hr />
 
       <form className="container" onSubmit={ onFormSubmit }>
@@ -175,7 +175,7 @@ export const CalendarModal = () => {
 
         <hr />
 
-        <div className='d-grid'>
+        <div className='text-end'>
           <button
             type="submit"
             className="btn btn-outline-primary"

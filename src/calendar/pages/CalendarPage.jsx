@@ -4,7 +4,9 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import { localizer, getMessagesEs } from "../../helpers";
 
-import { Navbar, CalendarEvent, CalendarModal, FabAddNew } from "../components";
+import {
+  Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete
+} from "../components";
 import { useUiStore, useCalendarStore } from "../../hooks";
 
 export const CalendarPage = () => {
@@ -42,7 +44,6 @@ export const CalendarPage = () => {
   return (
     <>
       <Navbar />
-
       <Calendar
         className='mx-4'
         style={{ height: 'calc(100vh - 120px)' }}
@@ -59,9 +60,9 @@ export const CalendarPage = () => {
         onSelectEvent={ onSelect }
         onView={ onViewChanged }
       />
-
       <CalendarModal />
       <FabAddNew />
+      <FabDelete />
     </>
   );
 
