@@ -8,10 +8,10 @@ import { localizer, getMessagesEs } from "../../helpers";
 import { CalendarEvent, CalendarModal, Navbar } from "../components";
 
 const events = [{
-  title: 'ReactJs Course',
-  notes: 'Exercise useState Hook and Custom Hooks',
+  title: 'Meeting with UX team',
+  notes: 'Check screens for app',
   start: new Date(),
-  end: addHours(new Date(), 3),
+  end: addHours(new Date(), 2),
   bgColor: '#fafafa',
   user: {
     _id: '123',
@@ -25,6 +25,7 @@ export const CalendarPage = () => {
 
   const eventStyleGetter = ( event, start, end, isSelected ) => {
     const style = {
+      width: '100%',
       backgroundColor: '#347CF7',
       borderRadius: '0px',
       opacity: 0.8,
@@ -62,9 +63,7 @@ export const CalendarPage = () => {
         className='mx-4'
         messages={ getMessagesEs() }
         eventPropGetter={ eventStyleGetter }
-        components={{
-          event: CalendarEvent
-        }}
+        components={{ event: CalendarEvent }}
         onDoubleClickEvent={ onDoubleClick }
         onSelectEvent={ onSelect }
         onView={ onViewChanged }

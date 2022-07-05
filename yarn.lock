@@ -735,10 +735,10 @@ prop-types@^15.7.2, prop-types@^15.8.1:
     object-assign "^4.1.1"
     react-is "^16.13.1"
 
-react-big-calendar@^0.40.4:
-  version "0.40.4"
-  resolved "https://registry.yarnpkg.com/react-big-calendar/-/react-big-calendar-0.40.4.tgz#1e892c58caaa19041535d69a990b5d962a661a59"
-  integrity sha512-7jO81MKPqrgDGGmTfPf406ebQkp8Z3nHC1Pw9kqiSK3sykDQalhUiJ4c2/kXVR2PbGlP1fCmc7CrBggG6EPwLg==
+react-big-calendar@^0.40.7:
+  version "0.40.7"
+  resolved "https://registry.yarnpkg.com/react-big-calendar/-/react-big-calendar-0.40.7.tgz#9fac76cd18d2aee0e7c47900fe74206dc1b15718"
+  integrity sha512-rckj7gPyQq/j0IIzPeIRFXE+rNEn7iFO3pxVs5BHXFHu6wn4SS1k5Ha7dTeJwcnhKMCPX11lRn1NT5LHN1TQlw==
   dependencies:
     "@babel/runtime" "^7.17.2"
     clsx "^1.1.1"
