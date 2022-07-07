@@ -99,6 +99,7 @@ export const CalendarModal = () => {
     };
 
     await startSavingEvent( formValues );
+
     closeDateModal();
     setFormSubmitted( false );
 
