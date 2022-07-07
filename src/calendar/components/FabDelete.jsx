@@ -9,11 +9,6 @@ export const FabDelete = () => {
   const handleDelete = () => {
     startDeletingEvent();
     closeDateModal();
-    Swal.fire(
-      'Evento Eliminado',
-      'El evento fue eliminado satisfactoriamente',
-      'success'
-    );
   };
 
   return (
