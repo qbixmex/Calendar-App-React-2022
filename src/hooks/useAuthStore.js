@@ -27,11 +27,21 @@ export const useAuthStore = () => {
 
     } catch (error) {
 
-      dispatch( onLogout('Bad Credentials') );
+      let errorMessage = error.response.data.msg;
+
+      if (error.response.data.errors?.email) {
+        errorMessage = error.response.data.errors.email.msg;
+      }
+
+      if (error.response.data.errors?.password) {
+        errorMessage = error.response.data.errors.password.msg;
+      }
+
+      dispatch( onLogout(errorMessage) );
 
       setTimeout(() => {
         dispatch( onClearMessage() );
-      }, 100);
+      }, 10);
 
     }
   };
