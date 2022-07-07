@@ -109,6 +109,12 @@ export const useAuthStore = () => {
 
   };
 
+  const startLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('token-init-date');
+    dispatch( onLogout() );
+  }
+
   return {
     // Properties
     status,
@@ -119,5 +125,6 @@ export const useAuthStore = () => {
     startLogin,
     startRegister,
     checkAuthToken,
+    startLogout,
   };
 };
