@@ -52,25 +52,26 @@ export const CalendarPage = () => {
   return (
     <>
       <Navbar />
-      <Calendar
-        className='mx-4'
-        style={{ height: 'calc(100vh - 120px)' }}
-        culture="es"
-        localizer={ localizer }
-        events={ events }
-        defaultView={ lastView }
-        startAccessor="start"
-        endAccessor="end"
-        messages={ getMessagesEs() }
-        eventPropGetter={ eventStyleGetter }
-        components={{ event: CalendarEvent }}
-        onDoubleClickEvent={ onDoubleClick }
-        onSelectEvent={ onSelect }
-        onView={ onViewChanged }
-      />
-      <CalendarModal />
-      <FabAddNew />
-      <FabDelete />
+      <div className="container">
+        <Calendar
+          style={{ height: 'calc(100vh - 120px)' }}
+          culture="es"
+          localizer={ localizer }
+          events={ events }
+          defaultView={ lastView }
+          startAccessor="start"
+          endAccessor="end"
+          messages={ getMessagesEs() }
+          eventPropGetter={ eventStyleGetter }
+          components={{ event: CalendarEvent }}
+          onDoubleClickEvent={ onDoubleClick }
+          onSelectEvent={ onSelect }
+          onView={ onViewChanged }
+        />
+        <CalendarModal />
+        <FabAddNew />
+        <FabDelete />
+      </div>
     </>
   );
 
