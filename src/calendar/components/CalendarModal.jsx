@@ -102,12 +102,6 @@ export const CalendarModal = () => {
 
     closeDateModal();
     setFormSubmitted( false );
-
-    Swal.fire(
-      'Formulario Enviado',
-      'Los datos del formulario son correctos',
-      'success'
-    );
   };
   
   return (

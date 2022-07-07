@@ -19,14 +19,14 @@ export const calendarSlice = createSlice({
     },
     onUpdateEvent: ( state, action ) => {
       state.events = state.events.map(event => {
-        if ( event._id === action.payload._id ) return action.payload;
+        if ( event.id === action.payload.id ) return action.payload;
         return event;
       });
       state.activeEvent = null;
     },
     onDeleteEvent: ( state ) => {
       if (state.activeEvent) {
-        state.events = state.events.filter( event => event._id !== state.activeEvent._id );
+        state.events = state.events.filter( event => event.id !== state.activeEvent.id );
         state.activeEvent = null;
       }
     },
