@@ -4,20 +4,20 @@ import './LoginPage.css';
 import Swal from 'sweetalert2';
 
 const loginFormFields = {
-  loginEmail: 'spiderman@marvel.com',
-  loginPassword: '0123456789'
+  loginEmail: '',
+  loginPassword: ''
 };
 
 const registerFormFields = {
-  registerName: 'Bruce Wayne',
-  registerEmail: 'batman@dc.com',
-  registerPassword: '0123456789',
-  registerPassword2: '0123456789',
+  registerName: '',
+  registerEmail: '',
+  registerPassword: '',
+  registerPassword2: '',
 };
 
 export const LoginPage = () => {
 
-  const { startLogin, errorMessage } = useAuthStore();
+  const { startLogin, startRegister, errorMessage } = useAuthStore();
   
   const {
     loginEmail, loginPassword, onInputChange: onLoginInputChange,
@@ -38,14 +38,24 @@ export const LoginPage = () => {
 
   const registerSubmit = ( event ) => {
     event.preventDefault();
-    console.table({ registerName, registerEmail, registerPassword, registerPassword2 });
+
+    if (registerPassword !== registerPassword2 ) {
+      Swal.fire('Error de registro', 'Las contraseñas no coinciden', 'error');
+      return;
+    }
+
+    startRegister({
+      name: registerName,
+      email: registerEmail,
+      password: registerPassword
+    });
   };
 
   useEffect(() => {
     if ( errorMessage !== undefined ) {
       Swal.fire('Error en la autenticación', errorMessage, 'error');
     }
-  }, [errorMessage]);
+  }, [ errorMessage ]);
 
   return (
     <div className="container login-container">
@@ -58,7 +68,7 @@ export const LoginPage = () => {
               <input
                 id="login-email"
                 name="loginEmail"
-                type="text"
+                type="email"
                 className="form-control"
                 placeholder="Correo"
                 value={ loginEmail }
@@ -124,9 +134,13 @@ export const LoginPage = () => {
 
             <div className="form-group mb-4">
               <input
+                id="register-password-2"
+                name="registerPassword2"
                 type="password"
                 className="form-control"
                 placeholder="Repita la contraseña"
+                value={ registerPassword2 }
+                onChange={ onRegisterInputChange }
               />
             </div>
 

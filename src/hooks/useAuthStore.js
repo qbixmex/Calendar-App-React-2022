@@ -3,8 +3,7 @@ import calendarAPI from "../api/calendarAPI";
 import { onChecking, onLogin, onLogout, onClearMessage } from "../store";
 
 export const useAuthStore = () => {
-  // onChecking,
-  // onLogin
+
   const { status, user, errorMessage } = useSelector( state => state.auth );
 
   const dispatch = useDispatch();
@@ -41,7 +40,48 @@ export const useAuthStore = () => {
 
       setTimeout(() => {
         dispatch( onClearMessage() );
-      }, 10);
+      }, 100);
+
+    }
+  };
+
+  const startRegister = async ({ name, email, password }) => {
+    dispatch( onChecking() );
+
+    try {
+
+      const { data } = await calendarAPI.post('/auth/new', {
+        name,
+        email,
+        password
+      });
+
+      localStorage.setItem('token', data.token );
+      localStorage.setItem('token-init-date', new Date().getTime() );
+
+      dispatch( onLogin({ name: data.name, uid: data.uid }) );
+
+    } catch (error) {
+
+      let errorMessage = error.response.data?.msg || '';
+
+      if (error.response.data.errors?.name) {
+        errorMessage = error.response.data.errors.name.msg;
+      }
+
+      if (error.response.data.errors?.email) {
+        errorMessage = error.response.data.errors.email.msg;
+      }
+
+      if (error.response.data.errors?.password) {
+        errorMessage = error.response.data.errors.password.msg;
+      }
+
+      dispatch( onLogout(errorMessage) );
+
+      setTimeout(() => {
+        dispatch( onClearMessage() );
+      }, 100);
 
     }
   };
@@ -53,6 +93,7 @@ export const useAuthStore = () => {
     errorMessage,
 
     // Methods
-    startLogin,    
+    startLogin,
+    startRegister,
   };
 };
