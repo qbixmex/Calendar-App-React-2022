@@ -1,24 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addHours } from 'date-fns';
-
-// TODO: Replace this event when backend is finished
-// ----------------------------------------------------
-const temporaryEvent = {
-  _id: new Date().getTime(),
-  title: 'Junta con el gobierno',
-  notes: 'Revizar los términos del tratado de Sokovia',
-  start: new Date(),
-  end: addHours(new Date(), 2),
-  bgColor: '#fafafa',
-  user: {
-    _id: '123456789',
-    name: 'Tony Stark'
-  }
-};
-// TODO: Replace this event ---------------------------
 
 const initialState = {
-  events: [ temporaryEvent ],
+  isLoadingEvents: true,
+  events: [],
   activeEvent: null,
 };
 
@@ -46,9 +30,16 @@ export const calendarSlice = createSlice({
         state.activeEvent = null;
       }
     },
+    onLoadEvents: ( state, action ) => {
+      state.isLoadingEvents = false;
+      action.payload.forEach(event => {
+        const exists = state.events.some( dbEvent => dbEvent.id === event.id );
+        if( !exists ) state.events.push( event );
+      });
+    },
   },
 });
 
 export const {
-  onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent
+  onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent, onLoadEvents
 } = calendarSlice.actions;
