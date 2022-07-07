@@ -7,19 +7,23 @@ import { localizer, getMessagesEs } from "../../helpers";
 import {
   Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete
 } from "../components";
-import { useUiStore, useCalendarStore } from "../../hooks";
+import { useUiStore, useCalendarStore, useAuthStore } from "../../hooks";
 
 export const CalendarPage = () => {
 
+  const { user } = useAuthStore();
   const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
   const { openDateModal } = useUiStore();
 
-  const [ lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week');
-
+  const [ lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'month');
+  
   const eventStyleGetter = ( event, start, end, isSelected ) => {
+
+    const isMyEvent = ( user.uid === event.user._id ) || ( user.uid === event.user.uid );
+
     const style = {
       width: '100%',
-      backgroundColor: '#347CF7',
+      backgroundColor: isMyEvent ? '#347CF7' : '#465660',
       borderRadius: '0px',
       opacity: 0.8,
       color: '#fff',
