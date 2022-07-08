@@ -7,7 +7,7 @@ export const initialState = {
 export const authenticatedState = {
   status: 'authenticated',
   user: {
-    uid: 'abc',
+    uid: '123Abc',
     name: 'Peter Parker',
   },
   errorMessage: undefined

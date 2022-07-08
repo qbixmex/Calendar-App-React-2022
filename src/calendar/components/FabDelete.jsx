@@ -1,6 +1,4 @@
-import Swal from 'sweetalert2';
 import { useCalendarStore, useUiStore } from '../../hooks';
-
 
 export const FabDelete = () => {
   const { startDeletingEvent, hasEventSelected } = useCalendarStore();
@@ -13,6 +11,7 @@ export const FabDelete = () => {
 
   return (
     <button
+      id="delete-btn"
       className="btn btn-danger fab-danger"
       onClick={ handleDelete }
       style={{ display: hasEventSelected && isModalClose ? '' : 'none' }}
