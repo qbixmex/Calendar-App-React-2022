@@ -33,8 +33,8 @@ export const calendarSlice = createSlice({
     onLoadEvents: ( state, action ) => {
       state.isLoadingEvents = false;
       action.payload.forEach(event => {
-        const exists = state.events.some( dbEvent => dbEvent.id === event.id );
-        if( !exists ) state.events.push( event );
+        const exists = state.events.some( dbEvent => dbEvent.id === event.id);
+        if ( !exists ) state.events.push( event );
       });
     },
     onLogoutCalendar: ( state ) => {

@@ -52,14 +52,27 @@ describe('Test on calendarSlice', () => {
 
   test('onDeleteEvent should delete an event', () => {
     const state = calendarSlice.reducer( calendarWithActiveEventState, onDeleteEvent() );
-    expect( state.events ).toEqual([ events[1] ]);
     expect( state.activeEvent ).toBe( null );
+    expect( state.events ).not.toContain( events[0] );
   });
 
   test('onLoadEvents should load events', () => {
     const state = calendarSlice.reducer( calendarInitialState, onLoadEvents(events) );
+    expect( state.isLoadingEvents ).toBeFalsy();
     expect( state.events ).toEqual( events );
-    expect( state.isLoadingEvents ).toBe( false );
+  });
+
+  test('onLoadEvents should load only new events', () => {
+    const newEvent = {
+      id: '3',
+      title: 'Curso de NodeJs',
+      notes: 'Testing con Jest y Supertest',
+      start: new Date('2022-08-17 17:00:00'),
+      end: new Date('2022-08-17 18:00:00'),
+    };
+    const state = calendarSlice.reducer( calendarWithEventsState, onLoadEvents([ ...events, newEvent ]) );
+    expect( state.events ).toEqual([ ...events, newEvent ]);
+    expect( state.isLoadingEvents ).toBeFalsy();
   });
 
   test('onLogoutCalendar should clear state', () => {
