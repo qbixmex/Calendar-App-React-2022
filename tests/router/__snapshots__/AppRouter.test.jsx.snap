@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test on AppRouter Should render to login page if user is not authenticated 1`] = `
+<div>
+  <div
+    class="container login-container"
+  >
+    <div
+      class="row g-4"
+    >
+      <div
+        class="col-lg-6 login-form-1"
+      >
+        <h2>
+          Login
+        </h2>
+        <form>
+          <div
+            class="form-group mb-2"
+          >
+            <input
+              class="form-control"
+              id="login-email"
+              name="loginEmail"
+              placeholder="Correo"
+              type="email"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group mb-4"
+          >
+            <input
+              class="form-control"
+              id="login-password"
+              name="loginPassword"
+              placeholder="Contraseña"
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            class="d-grid"
+          >
+            <button
+              class="btnSubmit"
+              type="submit"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+      <div
+        class="col-lg-6 login-form-2"
+      >
+        <h2>
+          Register
+        </h2>
+        <form>
+          <div
+            class="form-group mb-2"
+          >
+            <input
+              class="form-control"
+              id="register-name"
+              name="registerName"
+              placeholder="Nombre"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group mb-2"
+          >
+            <input
+              class="form-control"
+              id="register-email"
+              name="registerEmail"
+              placeholder="Correo"
+              type="email"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group mb-2"
+          >
+            <input
+              class="form-control"
+              id="register-password"
+              name="registerPassword"
+              placeholder="Contraseña"
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group mb-4"
+          >
+            <input
+              class="form-control"
+              id="register-password-2"
+              name="registerPassword2"
+              placeholder="Repita la contraseña"
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            class="d-grid"
+          >
+            <button
+              class="btnSubmit"
+              type="submit"
+            >
+              Create Account
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

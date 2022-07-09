@@ -15,7 +15,7 @@ export const AppRouter = () => {
   if ( status === 'checking' ) {
     return (
       <div className="mt-5 text-center">
-        <div className="spinner-border text-primary" role="status">
+        <div id="spinner" className="spinner-border text-primary" role="status">
           <span className="sr-only">Loading...</span>
         </div>
       </div>
