@@ -111,7 +111,7 @@ export const useAuthStore = () => {
     } catch (error) {
       localStorage.removeItem('token');
       localStorage.removeItem('token-init-date');
-      return dispatch( onLogout() );
+      return dispatch( onLogout(error.response.data.msg) );
     }
 
   };
